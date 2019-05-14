@@ -75,16 +75,29 @@ public class PostController {
 			System.out.println("posts were not deleted");
 		}
 	}
-	public ArrayList<Post> getAllPosts(String postType) {
+	public ArrayList<Post> getAllPosts(int postType) {
 		
 		List<Post> postList;
 		
-		if (postType.equals("student")) {
-			postList = db.findAllPosts();
+		// finds all posts
+		if (postType == 3) {
+			postList = db.findAllPosts(0);
+			postList.addAll(db.findAllPosts(1));
+			postList.addAll(db.findAllPosts(2));
 		}
+		
+		// finds all student posts
+		else if (postType == 4) {
+			postList = db.findAllPosts(0);
+			postList.addAll(db.findAllPosts(1));
+		}
+			
+		// finds specific type of post
 		else {
-			postList = db.findAllBusinessPosts();
+			postList = db.findAllPosts(postType);
 		}
+		
+		
 		
 		ArrayList<Post> posts = null;
 		if (postList.isEmpty()) {

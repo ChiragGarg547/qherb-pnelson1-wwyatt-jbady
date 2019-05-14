@@ -52,7 +52,7 @@ public class AllPostsServlet extends HttpServlet {
 		controller = new PostController();
 
 		// get list of authors returned from query
-		posts = controller.getAllPosts("student");
+		posts = controller.getAllPosts(3);
 
 		// any posts found?
 		if (posts == null) {

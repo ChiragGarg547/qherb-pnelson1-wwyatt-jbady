@@ -112,7 +112,7 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public ArrayList<Post> findAllPosts() {
+	public ArrayList<Post> findAllPosts(int postType) {
 		// TODO Auto-generated method stub
 		return null;
 	}

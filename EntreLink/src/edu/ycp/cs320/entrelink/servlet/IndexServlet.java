@@ -35,8 +35,8 @@ public class IndexServlet extends HttpServlet {
 		controller = new PostController();
 
 		// get list of authors returned from query
-		posts = controller.getAllPosts("student");
-		bPosts = controller.getAllPosts("business");
+		posts = controller.getAllPosts(4);
+		bPosts = controller.getAllPosts(2);
 
 		// any authors found?
 		if (posts == null) {

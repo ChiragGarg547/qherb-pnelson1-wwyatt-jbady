@@ -489,7 +489,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public ArrayList<Post> findAllPosts() {
+	public ArrayList<Post> findAllPosts(int postType) {
 		return executeTransaction(new Transaction<ArrayList<Post>>() {
 			@Override
 			public ArrayList<Post> execute(Connection conn) throws SQLException {
@@ -502,9 +502,11 @@ public class DerbyDatabase implements IDatabase {
 					stmt = conn.prepareStatement(
 							"SELECT posts.post_id, users.user_id, users.firstName, users.LastName, posts.timePosted, posts.title, posts.description, posts.postType, posts.tags " + 
 							"FROM users, posts " + 
-							"WHERE users.user_id = posts.poster_id AND (posts.postType = 0 OR posts.postType = 1) " +
+							"WHERE users.user_id = posts.poster_id AND (posts.postType = ?) " +
 							"ORDER BY posts.post_id DESC"
 							);
+
+					stmt.setInt(1, postType);
 					
 					resultSet = stmt.executeQuery();
 					

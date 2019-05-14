@@ -141,8 +141,8 @@ public class Post {
 		PostController controller2 = new PostController();
 
 		// get list of authors returned from query
-		posts = controller2.getAllPosts("student");
-		bPosts = controller2.getAllPosts("business");
+		posts = controller2.getAllPosts(4);
+		bPosts = controller2.getAllPosts(2);
 
 		// any authors found?
 		if (posts == null) {

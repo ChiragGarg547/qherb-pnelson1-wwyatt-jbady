@@ -33,13 +33,7 @@ public class ProjectServlet extends HttpServlet {
 		controller = new PostController();
 
 		// get list of posts returned from query
-		posts = controller.getAllPosts("student");
-		posts.addAll(controller.getAllPosts("business"));
-		
-		// any authors found?
-		if (posts == null) {
-			errorMessage = "No Posts were found in the Library";
-		}
+		posts = controller.getAllPosts(3);
 
 		// Add result objects as request attributes
 		req.setAttribute("errorMessage", errorMessage);
@@ -48,6 +42,7 @@ public class ProjectServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/projects.jsp").forward(req, resp);
 	}	
 	protected void doOpenProjects(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		System.out.println("test");
 		req.getRequestDispatcher("/_view/projects.jsp").forward(req, resp);
 	}
 	protected void doOpenProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
@@ -58,5 +53,42 @@ public class ProjectServlet extends HttpServlet {
 	}
 	protected void doOpenHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+	}
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		System.out.println("Project Servlet: doGet");	
+		String filtering = req.getParameter("filterBy");
+		System.out.println("Displaying only: " + filtering);
+		
+		// getting the http session
+		HttpSession session=req.getSession();
+		session.getAttribute("loggedInName");
+		
+		//posts most recent things
+		ArrayList<Post> posts = null;
+
+		controller = new PostController();
+
+		// get list of posts returned from query
+		//posts = controller.getAllPosts("student");
+		if(filtering.equals("Business Proposals")) {
+			posts = controller.getAllPosts(2);
+		}
+		else if(filtering.equals("Student Proposals")) {
+			posts = controller.getAllPosts(0);
+		}
+		else if(filtering.equals("Student Skills")) {
+			posts = controller.getAllPosts(1);
+		}
+		else {
+			posts = controller.getAllPosts(3);
+		}
+		
+		req.setAttribute("posts", posts);
+		
+		session.setAttribute("filterBy", filtering);
+		req.getRequestDispatcher("/_view/projects.jsp").forward(req, resp);
+		
 	}
 }
