@@ -518,6 +518,7 @@ public class DerbyDatabase implements IDatabase {
 							nPost.setTitle(resultSet.getString(index++));
 							nPost.setDescription(resultSet.getString(index++));
 							nPost.setPostType(resultSet.getInt(index++));
+							nPost.setTags(resultSet.getString(index++));
 							posts.add(nPost);
 					}
 				}finally {
@@ -559,6 +560,7 @@ public class DerbyDatabase implements IDatabase {
 						nPost.setTitle(resultSet.getString(index++));
 						nPost.setDescription(resultSet.getString(index++));
 						nPost.setPostType(resultSet.getInt(index++));
+						nPost.setTags(resultSet.getString(index++));
 						posts.add(nPost);
 					}
 				}finally {
