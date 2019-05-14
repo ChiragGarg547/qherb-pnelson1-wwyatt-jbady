@@ -51,20 +51,28 @@
 		
 			<c:when test="${! empty loggedInName}">
 				<h2>Messages</h2>
-				<form action="${pageContext.servletContext.contextPath}/findMessage" method="post" id="findMessage">
-				<center>
-					<c:forEach items="${messages}" var="msg">
-						<br/>
-					    <table id="messageTable">
-							<tr>
-								<th>${msg.recipientName} - ${msg.subject}</th>
-								<th style="text-align:right">Received ${msg.date}</th>
-							</tr>
-							<tr>
-								<td colspan="2">${msg.body}</td>
-							</tr>
-						</table>
-					</c:forEach>
+				<center><br/>
+				
+					<form action="${pageContext.servletContext.contextPath}/newmessage" method="compMessage">
+						<input type="Submit" value="Compose New Message" class="msgUser">
+					</form>
+					
+					<form action="${pageContext.servletContext.contextPath}/findMessage" method="post" id="findMessage">
+				
+						<c:forEach items="${messages}" var="msg">
+							<br/>
+							<table id="messageTable">
+								<tr>
+									<th>${msg.recipientName} - ${msg.subject}</th>
+									<th style="text-align:right">Received ${msg.date}</th>
+								</tr>
+								<tr>
+									<td colspan="2">${msg.body}</td>
+								</tr>
+							</table>
+						</c:forEach>
+					
+					</form>
 				</center>
 			</c:when>
 			

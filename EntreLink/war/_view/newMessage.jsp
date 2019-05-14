@@ -54,15 +54,19 @@
 		
 			<c:when test="${! empty loggedInName}">
 				<h2>Compose New Message</h2>
-				<form action="${pageContext.servletContext.contextPath}/newMessage" method="post" id="newMessageForm">
+				<form action="${pageContext.servletContext.contextPath}/newmessage" method="post" id="newMessageForm">
 					<table id="newPostTable">
 						<tr>
-							<td class="leftTable">Subject:</td>
-							<td class="rightTable"><input type="text" name="msgSubject" size="30" value="${msgSubject}" class="newPostBox"><input hidden type="text" name="loggedInId" size="30" value="${loggedInId}" class="newPostBox"></td>
+							<td class="leftTable">Recipient<font style="font-size:8pt;"> (username or email)</font></td>
+							<td class="rightTable"><input type="text" name="msgRecipient" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;"><input hidden type="text" name="loggedInId" size="30" value="${loggedInId}" class="newPostBox"></td>
 						</tr>
 						<tr>
-							<td class="leftTable">Body Text:</td>
-							<td class="rightTable"><textarea name="msgBody" size="30" value="${msgBody}" id="msgBody"></textarea></td>
+							<td class="leftTable">Subject</td>
+							<td class="rightTable"><input type="text" name="msgSubject" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;"></td>
+						</tr>
+						<tr>
+							<td class="leftTable">Body Text</td>
+							<td class="rightTable"><textarea name="msgBody" size="70" value="${msgBody}" id="msgBody" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;"></textarea></td>
 						</tr>
 						<tr>
 							<td></td>
