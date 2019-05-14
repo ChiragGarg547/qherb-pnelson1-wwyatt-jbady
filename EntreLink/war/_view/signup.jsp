@@ -15,12 +15,21 @@
 				</form>
 			</c:when>
 			<c:otherwise>
-				<form action="${pageContext.servletContext.contextPath}/profile" method="openProfile">
-					<div class="navLink" style="padding:0;">
+					<div class="navLink" style="padding:0;" id="profileLink">
 						<img id="userPic" src="${loggedInImg}" style="border-radius: 100%;width: 40px;display: inline-block;float: left;margin-top:14px;margin-left:10px;">
 						<input type="Submit" name="submit" value="${loggedInName}" class="navLink">
+						<div id="profileDropdown">
+							<form action="${pageContext.servletContext.contextPath}/profile" method="openProfile">
+								<input type="Submit" name="profile" value="Profile" class="navLink">
+							</form>
+							<form action="${pageContext.servletContext.contextPath}/messages" method="get">
+								<input type="Submit" name="messages" value="Messages" class="navLink">
+							</form>
+							<form action="${pageContext.servletContext.contextPath}/logout" method="get">
+								<input type="Submit" name="logout" value="Log Out" class="navLink">
+							</form>
+						</div>
 					</div>
-				</form>
 			</c:otherwise>
 		</c:choose>
 
@@ -32,10 +41,6 @@
 		</form>
 		<form action="${pageContext.servletContext.contextPath}/search" method="openSearch">
 			<input type="Submit" name="viewSearch" value="Search" class="navLink" style="float: right;">
-			<select name="searchIndex" value="Users" class="navLink" style="float: right;">
-				<option>Users</option>
-				<option>Projects</option>
-			</select>
 			<input type="text" name="searchText" id="searchBox">
 		</form>
 	</div>
@@ -71,11 +76,11 @@
 						</tr>
 						<tr>
 							<td class="leftTable">Password: </td>
-							<td class="rightTable"><input type="password" name="newPassword" size="12" value="${newPassword}" class="signupBox"></td>
+							<td class="rightTable"><input type="text" name="newPassword" size="12" value="${newPassword}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Confirm Password: </td>
-							<td class="rightTable"><input type="password" name="confirmPassword" size="12" value="${confirmPassword}" class="signupBox"></td>
+							<td class="rightTable"><input type="text" name="confirmPassword" size="12" value="${confirmPassword}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td>I am a:</td>

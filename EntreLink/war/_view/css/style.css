@@ -8,6 +8,7 @@ html, body {
 	background-color: #0b6623;
 	position: fixed;
 	z-index: 300;
+	height: 65px;
 }
 
 .navLink {
@@ -42,6 +43,22 @@ html, body {
 	margin-right: 10px;
 	transition: 0.2s ease;
 	width: 200px;
+}
+
+#profileDropdown {
+	overflow: hidden;
+	position: fixed;
+	top: 65px;
+	background-color: #50C878;
+	color: #000000;
+	max-height: 0;
+	transition: 0.3s ease;
+	z-index: -1;
+}
+
+#profileLink:hover #profileDropdown, #profileLink:focus #profileDropdown {
+	max-height: 250px;
+	z-index: 5;
 }
 
 #searchBox:hover {
