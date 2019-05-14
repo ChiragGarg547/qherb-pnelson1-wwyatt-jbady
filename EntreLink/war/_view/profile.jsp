@@ -63,8 +63,8 @@
 				<td class="rightTable">${loggedInSkills}</td>
 			</tr>
 			<tr>
-				<td class="leftTable">WebSite: </td>
-				<td class="rightTable"><a href="${loggedInWebsite}">${loggedInWebsite}</a></td>
+				<td class="leftTable">Website: </td>
+				<td class="rightTable">${loggedInWebsite}</td>
 			</tr>
 		</table>
 		<input type="Submit" name="editProfile" value="Edit Profile">
