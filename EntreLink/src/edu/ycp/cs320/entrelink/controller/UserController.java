@@ -135,6 +135,21 @@ public class UserController {
 		}
 	}
 	
+	public int getUserIdFromEmailOrUsername(String eou) {
+		System.out.println("Searching for user with username '" + eou + "'...");
+		
+		int id = db.getUserIdFromEmailOrUsername(eou);
+		
+		if(id == 0) {
+			System.out.println("User was not found.");
+			return 0;
+		} else {
+			System.out.println("Found user '" + eou + "' with user ID " + id);
+			return id;
+		}
+		
+	}
+	
 	public User getModel() {
 		return model;
 	}

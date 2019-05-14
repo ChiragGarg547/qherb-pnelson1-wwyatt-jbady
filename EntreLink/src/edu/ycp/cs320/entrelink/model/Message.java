@@ -1,6 +1,12 @@
 package edu.ycp.cs320.entrelink.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import edu.ycp.cs320.entrelink.controller.MessageController;
 
 public class Message {
 
@@ -77,6 +83,25 @@ public class Message {
 	}
 	public String getSenderName() {
 		return this.senderName;
+	}
+	
+	public void postMessages(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		
+		int userId = (int) session.getAttribute("loggedInId");
+			
+		
+		// Loading all the messages for the logged in user...
+		ArrayList<Message> messages = null;
+		String errorMessage = null;
+		MessageController controller = new MessageController();
+		
+		// get list of messages returned from query
+		messages = controller.getAllMessagesForLoggedInUser(userId);
+		
+		// Add result objects as request attributes
+		req.setAttribute("errorMessage", errorMessage);
+		req.setAttribute("messages", messages);
 	}
 	
 }

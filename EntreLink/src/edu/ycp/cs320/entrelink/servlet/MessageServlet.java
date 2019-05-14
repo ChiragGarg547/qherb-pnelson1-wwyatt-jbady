@@ -22,24 +22,13 @@ public class MessageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		System.out.println("Message Servlet: doGet");
 		
 		HttpSession session=req.getSession();
 		if(session.getAttribute("loggedInName") != null) {
-			int userId = (int) session.getAttribute("loggedInId");
-			
-			System.out.println("Message Servlet: doGet");	
-			
-			// Loading all the messages for the logged in user...
-			ArrayList<Message> messages = null;
-			String errorMessage = null;
-			controller = new MessageController();
-			
-			// get list of messages returned from query
-			messages = controller.getAllMessagesForLoggedInUser(userId);
-			
-			// Add result objects as request attributes
-			req.setAttribute("errorMessage", errorMessage);
-			req.setAttribute("messages", messages);
+			Message m = new Message();
+			m.postMessages(req);
 		}
 		req.getRequestDispatcher("/_view/messages.jsp").forward(req, resp);
 	}	

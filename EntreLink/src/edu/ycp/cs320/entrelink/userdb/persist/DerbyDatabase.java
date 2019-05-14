@@ -107,7 +107,7 @@ public class DerbyDatabase implements IDatabase {
 		post.setTags(resultSet.getString(index++));
 	}
 	
-	private void loadMessage(Message m, ResultSet resultSet, int index) throws SQLException {
+	private void loadMessage(Message m, ResultSet resultSet, int index, Boolean loadNames) throws SQLException {
 		m.setMessageId(resultSet.getInt(index++));
 		m.setSender(resultSet.getInt(index++));
 		m.setRecipient(resultSet.getInt(index++));
@@ -115,7 +115,7 @@ public class DerbyDatabase implements IDatabase {
 		m.setSubject(resultSet.getString(index++));
 		m.setBody(resultSet.getString(index++));
 		m.setRead(resultSet.getInt(index++));
-		m.setRecipientName(resultSet.getString(index++) + " " + resultSet.getString(index++));
+		if(loadNames) m.setRecipientName(resultSet.getString(index++) + " " + resultSet.getString(index++));
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -574,7 +574,6 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Post insertNewPost(int poster_id, String timePosted, String title, String description, int postType, String tags) {
-		// TODO Auto-generated method stub
 		return executeTransaction(new Transaction<Post>() {
 			@Override
 			public Post execute(Connection conn) throws SQLException {
@@ -771,7 +770,7 @@ public class DerbyDatabase implements IDatabase {
 					
 					while(resultSet.next()) {
 							Message nMessage = new Message();
-							loadMessage(nMessage, resultSet, 1);
+							loadMessage(nMessage, resultSet, 1, true);
 							messages.add(nMessage);
 					}
 				}finally {
@@ -1119,5 +1118,86 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 		
+	}
+	@Override
+	public Message sendMessage(int sender, int recipient, String date, String subject, String body) {
+		return executeTransaction(new Transaction<Message>() {
+			@Override
+			public Message execute(Connection conn) throws SQLException {
+				Message nMsg = new Message();
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				ResultSet resultSet1 = null;
+				
+						try {
+							
+							conn.setAutoCommit(true);
+							
+							stmt1 = conn.prepareStatement("insert into messages (sender, recipient, dateSent, subject, body, opened) values (?, ?, ?, ?, ?, 0)");
+							stmt1.setInt(1, sender);
+							stmt1.setInt(2, recipient);
+							stmt1.setString(3, date);
+							stmt1.setString(4, subject);
+							stmt1.setString(5, body);
+							stmt1.executeUpdate();
+							
+							//stmt2 = conn.prepareStatement("select * from posts where posts.poster_id = ? and posts.title = ?");
+							stmt2 = conn.prepareStatement(
+									"SELECT * " + 
+									"FROM  messages " + 
+									"WHERE messages.sender = ? and messages.body = ?" +
+									"ORDER BY messages.msgId DESC"
+									);
+							
+							stmt2.setInt(1, sender);
+							stmt2.setString(2, body);
+							
+							resultSet1 = stmt2.executeQuery();
+							
+							if(resultSet1.next()) {
+								loadMessage(nMsg, resultSet1, 1, false);
+							}
+						}finally {
+							DBUtil.closeQuietly(resultSet1);
+							DBUtil.closeQuietly(stmt1);
+							DBUtil.closeQuietly(stmt2);
+						}return nMsg;
+					}
+				
+		});
+	}
+	@Override
+	public int getUserIdFromEmailOrUsername(String eou) {
+		return executeTransaction(new Transaction<Integer>() {
+			@Override
+			public Integer execute(Connection conn) throws SQLException {
+				int id = 0;
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;							
+				try {
+					conn.setAutoCommit(true);
+					
+					stmt = conn.prepareStatement("SELECT user_id\n" + 
+							"FROM users\n" + 
+							"WHERE ? = username or ? = email");
+					stmt.setString(1, eou);
+					stmt.setString(2, eou);
+					
+					resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()) {
+							id = resultSet.getInt(1);
+					} else
+					{
+						return 0;
+					}
+					
+				}finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+				return id;
+			}
+		});
 	}
 }

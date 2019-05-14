@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import edu.ycp.cs320.entrelink.model.Message;
 import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 
@@ -185,6 +186,18 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public Boolean deleteUser(String username, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getUserIdFromEmailOrUsername(String eou) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Message sendMessage(int sender, int recipient, String date, String subject, String body) {
 		// TODO Auto-generated method stub
 		return null;
 	}

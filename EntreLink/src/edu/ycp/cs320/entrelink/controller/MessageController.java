@@ -29,4 +29,12 @@ public class MessageController {
 		
 		return messages;
 	}
+
+	public Message sendMessage(int sender, int recipient, String date, String subject, String body) {
+		Message m = new Message();
+		System.out.println("Sending message...");
+		
+		m = db.sendMessage(sender, recipient, date, subject, body);
+		return m;
+	}
 }

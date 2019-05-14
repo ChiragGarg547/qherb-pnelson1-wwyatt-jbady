@@ -3,6 +3,7 @@ package edu.ycp.cs320.entrelink.userdb.persist;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ycp.cs320.entrelink.model.Message;
 import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 
@@ -26,4 +27,6 @@ public interface IDatabase {
 	public Boolean deleteSinglePost(int poster_id, String title);
 	public Boolean deleteAllUserPosts(int poster_id);
 	public Boolean deleteUser(String username, String email);
+	public int getUserIdFromEmailOrUsername(String eou);
+	Message sendMessage(int sender, int recipient, String date, String subject, String body);
 }
