@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import edu.ycp.cs320.entrelink.controller.LoginController;
 import edu.ycp.cs320.entrelink.controller.SignupController;
 import edu.ycp.cs320.entrelink.controller.UserController;
-import edu.ycp.cs320.entrelink.model.NewUser;
-import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 
 public class SignupServlet extends HttpServlet {
@@ -56,7 +54,7 @@ public class SignupServlet extends HttpServlet {
 			User model = new User(newUsername, newPassword, firstname, lastname, newEmail, accountType);
 			SignupController controller = new SignupController();
 			controller.setModel(model);
-
+//
 			// check for errors in the form data before using is in a calculation
 			boolean doesUserExist = controller.verifyIsNewUser();
 			boolean areEmailsSame = newEmail.equals(confirmEmail);
@@ -81,18 +79,12 @@ public class SignupServlet extends HttpServlet {
 			
 			// otherwise, sign the user up
 			if(!doesUserExist && areEmailsSame && arePasswordsSame && isEmailValid) {
-				if(controller.createNewUser(newUsername, newPassword, firstname, lastname, newEmail, accountType) != null) {
-					System.out.println("Successfully inserted user.");
-				}
-				else {
-					System.out.println("User was not successfully inserted. Check your code, you butt.");
-				}
-				
-				Post post = new Post();
-				post.postPosts(req);
-				
-				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
-			}		
+				UserController uController = new UserController();
+				uController.createNewUser(model.getUsername(), model.getPassword(), model.getUserFirstName(), 
+						model.getUserLastName(), model.getEmail(), model.getUserType());
+				req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+			}
+		
 	}
 	
 	protected void doOpenProjects(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
