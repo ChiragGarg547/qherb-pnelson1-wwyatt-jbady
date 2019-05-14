@@ -11,6 +11,10 @@ html, body {
 	height: 65px;
 }
 
+#userPic {
+	height : 40px;
+}
+
 .navLink {
 	display: inline-block;
 	float: left;
