@@ -46,7 +46,6 @@ public class IndexServlet extends HttpServlet {
 		// Add result objects as request attributes
 		req.setAttribute("errorMessage", errorMessage);
 		req.setAttribute("posts", posts);
-		System.out.println("Tags: " + posts.get(0).getTags());
 		req.setAttribute("bPosts", bPosts);
 		
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
@@ -62,6 +61,7 @@ public class IndexServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/search.jsp").forward(req, resp);
 	}
 	protected void doOpenHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		System.out.println("doOpenHome");
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 	}
 }

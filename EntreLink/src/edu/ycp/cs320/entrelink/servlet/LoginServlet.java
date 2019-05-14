@@ -1,6 +1,7 @@
 package edu.ycp.cs320.entrelink.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.entrelink.controller.LoginController;
+import edu.ycp.cs320.entrelink.controller.PostController;
+import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 import edu.ycp.cs320.entrelink.servlet.ProfileServlet;
 
@@ -75,6 +78,10 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("loggedInId", controller.getModel().getUserId());
 				session.setAttribute("loggedInType", controller.getModel().getUserType());
 				session.setAttribute("errorMessage", "");
+				
+				Post post = new Post();
+				post.postPosts(req);
+				
 		        req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 			}
 		

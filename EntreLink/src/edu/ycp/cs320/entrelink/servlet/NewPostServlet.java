@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.entrelink.controller.PostController;
 import edu.ycp.cs320.entrelink.model.DateModifier;
+import edu.ycp.cs320.entrelink.model.Post;
 
 public class NewPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -100,6 +101,9 @@ public class NewPostServlet extends HttpServlet {
 		req.setAttribute("postTitle", postTitle);
 		req.setAttribute("postDescription", postDescription);
 		req.setAttribute("tags", tags);
+		
+		Post post = new Post();
+		post.postPosts(req);
 		
 		// Forward to view to render the result HTML document
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);

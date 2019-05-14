@@ -12,6 +12,7 @@ import edu.ycp.cs320.entrelink.controller.LoginController;
 import edu.ycp.cs320.entrelink.controller.SignupController;
 import edu.ycp.cs320.entrelink.controller.UserController;
 import edu.ycp.cs320.entrelink.model.NewUser;
+import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 
 public class SignupServlet extends HttpServlet {
@@ -87,9 +88,11 @@ public class SignupServlet extends HttpServlet {
 					System.out.println("User was not successfully inserted. Check your code, you butt.");
 				}
 				
+				Post post = new Post();
+				post.postPosts(req);
+				
 				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
-			}
-		
+			}		
 	}
 	
 	protected void doOpenProjects(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {

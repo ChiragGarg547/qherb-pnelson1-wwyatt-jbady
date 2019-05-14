@@ -3,6 +3,10 @@ package edu.ycp.cs320.entrelink.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.servlet.http.HttpServletRequest;
+
+import edu.ycp.cs320.entrelink.controller.PostController;
+
 public class Post {
 	
 	// User-related fields
@@ -126,5 +130,28 @@ public class Post {
 		String[] list = tags.split(" ");
 		ArrayList<String> aList = new ArrayList<String>(Arrays.asList(list));
 		return aList;
+	}
+	
+	public void postPosts(HttpServletRequest req) {
+		//posts most recent things
+		ArrayList<Post> posts = null;
+		ArrayList<Post> bPosts = null;
+		String errorMessage2 = null;
+
+		PostController controller2 = new PostController();
+
+		// get list of authors returned from query
+		posts = controller2.getAllPosts("student");
+		bPosts = controller2.getAllPosts("business");
+
+		// any authors found?
+		if (posts == null) {
+			errorMessage2 = "No Posts were found in the Library";
+		}
+
+		// Add result objects as request attributes
+		req.setAttribute("errorMessage", errorMessage2);
+		req.setAttribute("posts", posts);
+		req.setAttribute("bPosts", bPosts);
 	}
 }
