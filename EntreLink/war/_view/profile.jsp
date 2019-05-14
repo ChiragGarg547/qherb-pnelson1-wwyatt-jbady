@@ -67,6 +67,19 @@
 				<td class="leftTable">Skills: </td>
 				<td class="rightTable">${loggedInSkills}</td>
 			</tr>
+			<tr>
+				<td class="leftTable">Website: </td>
+				<td class="rightTable">
+					<c:choose>
+						<c:when test="${loggedInWebsite != 'N/A'}">
+							<a target="_blank" href="${loggedInWebsite}">${loggedInWebsite}</a>
+						</c:when>
+						<c:otherwise>
+							${loggedInWebsite}
+						</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
 
 		</table>
 	</div>
