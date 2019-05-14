@@ -25,5 +25,5 @@ public interface IDatabase {
 	public ArrayList<Post> findAllBusinessPosts();
 	public Boolean deleteSinglePost(int poster_id, String title);
 	public Boolean deleteAllUserPosts(int poster_id);
-	Boolean deleteUser(String username, String email);
+	public Boolean deleteUser(String username, String email);
 }

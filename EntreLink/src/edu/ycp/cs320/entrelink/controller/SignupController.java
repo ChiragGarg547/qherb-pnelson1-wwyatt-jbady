@@ -6,7 +6,7 @@ import edu.ycp.cs320.entrelink.model.User;
 import edu.ycp.cs320.entrelink.userdb.persist.DatabaseProvider;
 import edu.ycp.cs320.entrelink.userdb.persist.DerbyDatabase;
 import edu.ycp.cs320.entrelink.userdb.persist.IDatabase;
-import com.mkyong.regex.EmailValidator;
+//import com.mkyong.regex.EmailValidator;
 
 public class SignupController {
 	
@@ -32,13 +32,14 @@ public class SignupController {
 	}
 	
 	public boolean verifyEmailIsValid() {
-		String testEmail = model.getNewEmail();
+		/*String testEmail = model.getEmail();
 		EmailValidator validate = new EmailValidator();
 		if(validate.validate(testEmail)) {
 
 			return true;
 		}
-		return false;
+		return false;*/
+		return true;
 	}
 	
 	public User getModel() {
