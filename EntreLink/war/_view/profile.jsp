@@ -32,6 +32,10 @@
 		</form>
 		<form action="${pageContext.servletContext.contextPath}/search" method="openSearch">
 			<input type="Submit" name="viewSearch" value="Search" class="navLink" style="float: right;">
+			<select name="searchIndex" value="Users" class="navLink" style="float: right;">
+				<option>Users</option>
+				<option>Projects</option>
+			</select>
 			<input type="text" name="searchText" id="searchBox">
 		</form>
 	</div>
@@ -58,8 +62,23 @@
 				<td class="leftTable">Skills: </td>
 				<td class="rightTable">${loggedInSkills}</td>
 			</tr>
-
+			<tr>
+				<td class="leftTable">WebSite: </td>
+				<td class="rightTable"><a href="${loggedInWebsite}">${loggedInWebsite}</a></td>
+			</tr>
 		</table>
+		<input type="Submit" name="editProfile" value="Edit Profile">
+		<h3>My Projects</h3>
+		<c:forEach items="${posts}" var="post">
+			<div postId="${post.postId}" class="listingPost">
+	            <h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${post.name} on ${post.timePosted}</span></h3>
+	            <div class="hideOverflow">
+					<p class="projectDescription">${post.description}</p>
+	            </div>
+			<a href="#">Read More</a>
+	        </div>
+	    </c:forEach>
+		
 	</div>
 
 
