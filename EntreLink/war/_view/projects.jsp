@@ -48,24 +48,39 @@
 	<div class="content">
 		<h2>Projects</h2>
 		<div id="filterProjects">
-			Filter by:&emsp;
-			<select>
-				<option>All Listings</option>
-				<option>Business Proposals</option>
-				<option>Student Proposals</option>
-				<option>Student Skills</option>
-			</select>
+			Filter by:
+			<form action="${pageContext.servletContext.contextPath}/projects" method="post" id="filterForm">
+				<select onchange="this.form.submit()" name="filterBy" value="${filterBy}">
+					<option>All Listings</option>
+					<option>Business Proposals</option>
+					<option>Student Proposals</option>
+					<option>Student Skills</option>
+				</select>
+			</form>
 		</div>
 		
-	    <c:forEach items="${posts}" var="post">
+		<c:forEach items="${posts}" var="post">
 			<div postId="${post.postId}" class="listingPost">
-	            <h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${post.name} on ${post.timePosted}</span></h3>
-	            <div class="hideOverflow">
+    			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${post.name} on ${post.timePosted}</span></h3>
+    			<div class="hideOverflow">
 					<p class="projectDescription">${post.description}</p>
-	            </div>
-			<a href="#">Read More</a>
-	        </div>
-	    </c:forEach>
+					
+        			<table style="width:100%">
+        				<tr>
+							<td><p class="projectTags">Tags: ${post.tags}</p></td>
+							
+							<c:choose>
+								<c:when test="${loggedInName != post.name}">
+									<td style="text-align:right"><form action="${pageContext.servletContext.contextPath}/newmessage" method="compMessage">
+										<input type="Submit" name="${post.name}" value="Message Student" class="msgUser">
+									</form></td>
+								</c:when>
+							</c:choose>
+						</tr>
+					</table>
+    			</div>
+			</div>
+		</c:forEach>
 	</div>
 
 

@@ -68,24 +68,38 @@
 				<td class="rightTable">${loggedInSkills}</td>
 			</tr>
 			<tr>
-				<td class="leftTable">WebSite: </td>
-				<td class="rightTable"><a href="${loggedInWebsite}">${loggedInWebsite}</a></td>
+				<td class="leftTable">Website: </td>
+				<td class="rightTable">
+					<c:choose>
+						<c:when test="${loggedInWebsite != 'N/A'}">
+							<a target="_blank" href="${loggedInWebsite}">${loggedInWebsite}</a>
+						</c:when>
+						<c:otherwise>
+							${loggedInWebsite}
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 		</table>
 		<form action="${pageContext.servletContext.contextPath}/edituser" method="openEditUser">
 			<input type="Submit" name="editProfile" value="Edit Profile">
 		</form>
+		<br/><br/>
 		<h3>My Projects</h3>
-		<c:forEach items="${posts}" var="post">
-			<div postId="${post.postId}" class="listingPost">
-	            <h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${post.name} on ${post.timePosted}</span></h3>
-	            <div class="hideOverflow">
-					<p class="projectDescription">${post.description}</p>
-	            </div>
-			<a href="#">Read More</a>
-	        </div>
-	    </c:forEach>
-		
+			<c:forEach items="${posts}" var="post">
+				<div postId="${post.postId}" class="listingPost">
+        			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${loggedInName} on ${post.timePosted}</span></h3>
+        			<div class="hideOverflow">
+						<p class="projectDescription">${post.description}</p>
+						
+            			<table style="width:100%">
+            				<tr>
+								<td><p class="projectTags">Tags: ${post.tags}</p></td>
+							</tr>
+						</table>
+        			</div>
+    			</div>
+			</c:forEach>
 	</div>
 
 
