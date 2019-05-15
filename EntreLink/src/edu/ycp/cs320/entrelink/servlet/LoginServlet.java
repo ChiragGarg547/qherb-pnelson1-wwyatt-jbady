@@ -48,7 +48,6 @@ public class LoginServlet extends HttpServlet {
 		controller.setModel(model);
 		
 		// password encryption stuff
-		CipherPassword cipher = new CipherPassword();
 		String secret = "MarbleTulipJuicyTree";
 		
 		
@@ -56,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		// there was a try block here but I deleted it
 			String email = req.getParameter("emailAsUsername");
 			String password = req.getParameter("passwordOfUser");
-			password = cipher.encrypt(password, secret);
+			password = CipherPassword.encrypt(password, secret);
 			
 			
 			model.setEmail(email);
