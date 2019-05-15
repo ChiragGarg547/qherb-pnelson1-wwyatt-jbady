@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import edu.ycp.cs320.entrelink.controller.LoginController;
 import edu.ycp.cs320.entrelink.controller.SignupController;
 import edu.ycp.cs320.entrelink.controller.UserController;
+import edu.ycp.cs320.entrelink.model.CipherPassword;
 import edu.ycp.cs320.entrelink.model.User;
 
 public class SignupServlet extends HttpServlet {
@@ -39,6 +40,9 @@ public class SignupServlet extends HttpServlet {
 
 		// holds the error message text, if there is any
 		String errorMessage = null;
+		
+		// password encryption
+		String secret = "MarbleTulipJuicyTree";
 
 		// decode POSTed form parameters and dispatch to controller
 		// there was a try block here but I deleted it
@@ -80,7 +84,7 @@ public class SignupServlet extends HttpServlet {
 			// otherwise, sign the user up
 			if(!doesUserExist && areEmailsSame && arePasswordsSame && isEmailValid) {
 				UserController uController = new UserController();
-				uController.createNewUser(model.getUsername(), model.getPassword(), model.getUserFirstName(), 
+				uController.createNewUser(model.getUsername(), CipherPassword.encrypt(model.getPassword(), secret), model.getUserFirstName(), 
 						model.getUserLastName(), model.getEmail(), model.getUserType());
 				req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 			}
