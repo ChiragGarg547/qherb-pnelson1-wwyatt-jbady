@@ -23,6 +23,7 @@ public class ProjectServlet extends HttpServlet {
 		
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
+		req.setAttribute("errorMessage", "");
 		
 		System.out.println("Project Servlet: doGet");	
 

@@ -20,6 +20,7 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.setAttribute("loggedInName", null);
 		Boolean sessionExists = session.isNew();
+		req.setAttribute("errorMessage", "");
         
 		
 		System.out.println("Logout Servlet: doGet");

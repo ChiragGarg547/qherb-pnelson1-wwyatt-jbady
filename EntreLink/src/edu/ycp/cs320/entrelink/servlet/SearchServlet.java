@@ -17,6 +17,7 @@ public class SearchServlet extends HttpServlet {
 		
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
+		req.setAttribute("errorMessage", "");
 		
 		System.out.println("Search Servlet: doGet");
 		

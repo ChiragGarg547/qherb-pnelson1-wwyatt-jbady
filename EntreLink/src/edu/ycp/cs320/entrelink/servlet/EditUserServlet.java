@@ -1,6 +1,7 @@
 package edu.ycp.cs320.entrelink.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.entrelink.controller.LoginController;
+import edu.ycp.cs320.entrelink.controller.PostController;
 import edu.ycp.cs320.entrelink.controller.SignupController;
 import edu.ycp.cs320.entrelink.controller.UserController;
+import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 
 public class EditUserServlet extends HttpServlet {
@@ -23,6 +26,7 @@ public class EditUserServlet extends HttpServlet {
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
 		Boolean sessionExists = session.isNew();
+		req.setAttribute("errorMessage", "");
         
 		
 		System.out.println("Edit User Servlet: doGet");
@@ -74,6 +78,21 @@ public class EditUserServlet extends HttpServlet {
 			} else {
 				System.out.println("Error updating profile.");
 			}
+			
+			ArrayList<Post> posts = null;
+
+			PostController controller2 = new PostController();
+
+			// get list of posts returned from query
+			System.out.println(session.getAttribute("loggedInUserName").toString());
+			posts = controller2.searchPostsByUserName(session.getAttribute("loggedInUserName").toString());
+			//posts.addAll(controller.getAllPosts("business"));
+			if(posts.size() == 0) posts = null;
+			
+			if (posts == null) {
+				errorMessage = "No Posts were found in the Library";
+			}
+			req.setAttribute("posts", posts);
 			
 			doOpenProfile(req, resp);
 		

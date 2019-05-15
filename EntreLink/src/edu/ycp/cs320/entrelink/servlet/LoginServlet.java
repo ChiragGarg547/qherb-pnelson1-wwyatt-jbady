@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession session=req.getSession(); 
+		req.setAttribute("errorMessage", "");
 
 		System.out.println("Login Servlet: doGet");	
 		

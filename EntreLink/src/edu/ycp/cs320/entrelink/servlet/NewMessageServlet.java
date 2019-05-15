@@ -28,6 +28,7 @@ public class NewMessageServlet extends HttpServlet {
 		
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
+		req.setAttribute("errorMessage", "");
 		
 		System.out.println("New Message Servlet: doGet");
 		
@@ -74,6 +75,10 @@ public class NewMessageServlet extends HttpServlet {
 		sender		= (int)session.getAttribute("loggedInId");
 		subject		= req.getParameter("msgSubject");
 		body		= req.getParameter("msgBody");
+
+		req.setAttribute("msgRecipient", req.getParameter("msgRecipient"));
+		req.setAttribute("msgSubject", subject);
+		req.setAttribute("msgBody", body);
 		
 		if(sender 	== 0 	|| recipient == 0 ||
 		   subject 	== null || subject.equals("") ||
@@ -81,6 +86,7 @@ public class NewMessageServlet extends HttpServlet {
 			
 			errorMessage = "Please fill in all of the required fields.";
 			session.setAttribute("errorMessage", errorMessage);
+			req.getRequestDispatcher("/_view/newMessage.jsp").forward(req, resp);
 		} else {
 			session.setAttribute("errorMessage", "");
 			
@@ -93,16 +99,14 @@ public class NewMessageServlet extends HttpServlet {
 				session.setAttribute("errorMessage", errorMessage);
 				System.out.println(errorMessage);
 			}
+			req.setAttribute("errorMessage", errorMessage);
+			
+			// loads the messages for the next thing
+			Message m = new Message();
+			m.postMessages(req);
+			req.getRequestDispatcher("/_view/messages.jsp").forward(req, resp);
 		}
 
-		req.setAttribute("sender", sender);
-		req.setAttribute("subject", subject);
-		req.setAttribute("body", body);
-		req.setAttribute("errorMessage", errorMessage);
-		
-		// loads the messages for the next thing
-		Message m = new Message();
-		m.postMessages(req);
-		req.getRequestDispatcher("/_view/messages.jsp").forward(req, resp);
+
 	}
 }

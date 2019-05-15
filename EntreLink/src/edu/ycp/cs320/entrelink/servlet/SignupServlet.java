@@ -24,6 +24,7 @@ public class SignupServlet extends HttpServlet {
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
 		Boolean sessionExists = session.isNew();
+		req.setAttribute("errorMessage", "");
         
 		
 		System.out.println("Signup Servlet: doGet");

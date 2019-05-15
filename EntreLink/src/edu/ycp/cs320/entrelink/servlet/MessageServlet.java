@@ -26,6 +26,7 @@ public class MessageServlet extends HttpServlet {
 		System.out.println("Message Servlet: doGet");
 		
 		HttpSession session=req.getSession();
+		req.setAttribute("errorMessage", "");
 		if(session.getAttribute("loggedInName") != null) {
 			Message m = new Message();
 			m.postMessages(req);

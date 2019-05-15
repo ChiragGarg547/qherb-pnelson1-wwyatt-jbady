@@ -22,6 +22,7 @@ public class ProfileServlet extends HttpServlet {
 		
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
+		req.setAttribute("errorMessage", "");
 		
 		System.out.println("Profile Servlet: doGet");
 		

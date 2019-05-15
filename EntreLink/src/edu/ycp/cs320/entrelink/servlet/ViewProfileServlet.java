@@ -21,6 +21,7 @@ public class ViewProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.setAttribute("loggedInName", null);
 		Boolean sessionExists = session.isNew();
+		req.setAttribute("errorMessage", "");
         
 		
 		String parseURL = req.getPathInfo();

@@ -26,6 +26,7 @@ public class NewPostServlet extends HttpServlet {
 		
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
+		req.setAttribute("errorMessage", "");
 		
 		System.out.println("New Post Servlet: doGet");
 		
@@ -73,8 +74,10 @@ public class NewPostServlet extends HttpServlet {
 		postType		= req.getParameter("postType");
 		logId			= Integer.parseInt(req.getParameter("loggedInId"));
 		
-		// Gets logged in user type
-		
+		// set fields
+		req.setAttribute("postTitle", postTitle);
+		req.setAttribute("postDescription", postDescription);
+		req.setAttribute("tags", tags);
 		
 		// Set the post type value accordingly...
 		if(session.getAttribute("loggedInType").equals("Business")) type = 2;
@@ -86,11 +89,17 @@ public class NewPostServlet extends HttpServlet {
 			
 			errorMessage = "Please fill in all of the required fields";
 			session.setAttribute("errorMessage", "ERROR: Please fill in all required fields!");
+			req.getRequestDispatcher("/_view/new_post.jsp").forward(req, resp);
 		} else {
 			session.setAttribute("errorMessage", "");
 			controller = new PostController();
+			req.setAttribute("errorMessage", errorMessage);
 			if(controller.createNewPost(logId, date, postTitle, postDescription, type, tags) != null) {
 				System.out.println("Successfully inserted post.");
+				// Forward to view to render the result HTML document		
+				Post post = new Post();
+				post.postPosts(req);
+				req.getRequestDispatcher("/_view/projects.jsp").forward(req, resp);
 			}
 			else {
 				System.out.println("Post was not successfully inserted. Check your code, you butt.");
@@ -98,16 +107,9 @@ public class NewPostServlet extends HttpServlet {
 
 		}
 		
-		req.setAttribute("postTitle", postTitle);
-		req.setAttribute("postDescription", postDescription);
-		req.setAttribute("tags", tags);
-		req.setAttribute("errorMessage", errorMessage);
+
+
 		
-		Post post = new Post();
-		post.postPosts(req);
-		
-		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 		
 	}
 }

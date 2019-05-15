@@ -23,6 +23,7 @@ public class IndexServlet extends HttpServlet {
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
 		Boolean sessionExists = session.isNew();
+		req.setAttribute("errorMessage", "");
         
 		
 		System.out.println("Index Servlet: doGet");
