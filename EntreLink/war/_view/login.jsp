@@ -58,8 +58,11 @@
 					<input type="text" name="emailAsUsername" size="12" value="${emailAsUsername}" class="loginTextBox" /><br>
 					Password:<br>
 					<input type="password" name="passwordOfUser" size="12" value="${passwordOfUser}" class="loginTextBox" /><br>
-					<center><input type="Submit" name="submitLoginData" value="Log in"></center>	
+					<center><input type="Submit" name="submitLoginData" value="Log in"></center>
 				</form>
+				<c:if test="${! empty errorMessage}">
+					<div class="errorMessage">${errorMessage}</div>
+				</c:if>
 				<form action="${pageContext.servletContext.contextPath}/signup" method="get" id="signupForm">
 					<h3>Need an account?</h3>
 					<input type="Submit" name="submitLoginData" value="Sign up" style="display: block; margin: 0 auto;">

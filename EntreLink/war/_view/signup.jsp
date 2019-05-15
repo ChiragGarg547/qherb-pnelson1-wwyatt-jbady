@@ -94,6 +94,9 @@
 					</table>
 					<input type="Submit" name="signUp" value="Sign up" style="display: block; margin: 10px auto;" onclick="verifyEquals()">
 				</form>
+				<c:if test="${! empty errorMessage}">
+					<div class="errorMessage">${errorMessage}</div>
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 	</div>
