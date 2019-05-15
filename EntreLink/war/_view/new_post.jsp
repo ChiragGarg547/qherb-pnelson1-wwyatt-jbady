@@ -88,6 +88,9 @@
 						</tr>
 					</table>
 				</form>
+				<c:if test="${! empty errorMessage}">
+					<div class="errorMessage">${errorMessage}</div>
+				</c:if>
 			</c:when>
 			
 			
