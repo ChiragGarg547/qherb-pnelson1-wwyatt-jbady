@@ -39,9 +39,9 @@
 		<form action="${pageContext.servletContext.contextPath}/projects" method="openProjects">
 			<input type="Submit" name="viewProjects" value="Projects" class="navLink">
 		</form>
-		<form action="${pageContext.servletContext.contextPath}/search" method="openSearch">
+		<form action="${pageContext.servletContext.contextPath}/search" method="post">
 			<input type="Submit" name="viewSearch" value="Search" class="navLink" style="float: right;">
-			<input type="text" name="searchText" id="searchBox">
+			<input type="text" name="search" id="searchBox" value="${search}">
 		</form>
 	</div>
 
