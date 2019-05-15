@@ -160,4 +160,8 @@ public class UserController {
 		return db.editProfile(id, picture, bio, major, status, interests, skills, website);
 		
 	}
+	public User getUserFromId(int userID) {
+		System.out.println("Fetching user data with ID '" + userID + "'");
+		return db.getUserFromId(userID);
+	}
 }

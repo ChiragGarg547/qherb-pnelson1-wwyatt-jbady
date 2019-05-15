@@ -209,6 +209,12 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 
+	@Override
+	public User getUserFromId(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

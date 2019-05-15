@@ -31,4 +31,5 @@ public interface IDatabase {
 	Message sendMessage(int sender, int recipient, String date, String subject, String body);
 	public User editProfile(int id, String picture, String bio, String major, String status, String interests, String skills,
 			String website);
+	public User getUserFromId(int userID);
 }

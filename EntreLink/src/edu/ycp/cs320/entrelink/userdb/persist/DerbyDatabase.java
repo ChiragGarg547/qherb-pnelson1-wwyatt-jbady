@@ -1147,7 +1147,7 @@ public class DerbyDatabase implements IDatabase {
 							stmt2 = conn.prepareStatement(
 									"SELECT * " + 
 									"FROM  messages " + 
-									"WHERE messages.sender = ? and messages.body = ?" +
+									"WHERE messages.sender = ? and messages.body = ? " +
 									"ORDER BY messages.msgId DESC"
 									);
 							
@@ -1179,8 +1179,8 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					conn.setAutoCommit(true);
 					
-					stmt = conn.prepareStatement("SELECT user_id\n" + 
-							"FROM users\n" + 
+					stmt = conn.prepareStatement("SELECT user_id " + 
+							"FROM users " + 
 							"WHERE ? = username or ? = email");
 					stmt.setString(1, eou);
 					stmt.setString(2, eou);
@@ -1245,5 +1245,38 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 		
+	}
+	@Override
+	public User getUserFromId(int userID) {
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				User user = new User();
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;							
+				try {
+					conn.setAutoCommit(true);
+					
+					stmt = conn.prepareStatement("SELECT * " + 
+							"FROM users " + 
+							"WHERE user_id = ?");
+					stmt.setInt(1, userID);
+					
+					resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()) {
+							loadUser(user, resultSet, 1);
+					} else
+					{
+						return null;
+					}
+					
+				}finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+				return user;
+			}
+		});
 	}
 }
