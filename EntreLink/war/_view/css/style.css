@@ -319,3 +319,14 @@ html, body {
 	color: red;
 	padding-bottom: 20px;
 }
+
+.msgUser {
+	border:2px solid green;
+	border-radius:4px;
+	background-color:white;
+	cursor: pointer;
+}
+
+#userPic {
+	height:40px;
+}

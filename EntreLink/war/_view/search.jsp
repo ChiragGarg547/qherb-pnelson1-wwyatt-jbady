@@ -46,13 +46,21 @@
 	</div>
 
 	<div class="content">
- 		<h2>Search Results</h2>
+ 		<h2>Search Results 
+ 		<c:choose>
+ 			<c:when test="${posts != null and search != null and search != '' and search != ' '}">
+ 				for '${search}'
+ 			</c:when>
+ 		</c:choose>
+ 		
+ 		
+ 		</h2>
  		<br/>
  		<c:choose>
  			<c:when test="${posts != null}">
 		 		<c:forEach items="${posts}" var="post">
 					<div postId="${post.postId}" class="listingPost">
-		    			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${post.name} on ${post.timePosted}</span></h3>
+		    			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by <a href="${pageContext.servletContext.contextPath}/viewProfile/${post.posterId}" style="display: inline; color: #111;">${post.name}</a> on ${post.timePosted}</span></h3>
 		    			<div class="hideOverflow">
 							<p class="projectDescription">${post.description}</p>
 							
