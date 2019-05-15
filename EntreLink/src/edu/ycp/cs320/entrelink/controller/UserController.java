@@ -153,4 +153,11 @@ public class UserController {
 	public User getModel() {
 		return model;
 	}
+	public User editProfile(int id, String picture, String bio, String major, String status, String interests, String skills,
+			String website) {
+		System.out.println("Editing user profile...");
+		
+		return db.editProfile(id, picture, bio, major, status, interests, skills, website);
+		
+	}
 }

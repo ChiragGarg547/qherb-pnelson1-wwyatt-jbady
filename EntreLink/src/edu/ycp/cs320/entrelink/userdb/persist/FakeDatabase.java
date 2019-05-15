@@ -202,6 +202,13 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 
+	@Override
+	public User editProfile(int id, String picture, String bio, String major, String status, String interests, String skills,
+			String website) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

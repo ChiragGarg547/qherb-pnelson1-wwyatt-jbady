@@ -1202,4 +1202,48 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	@Override
+	public User editProfile(int id, String picture, String bio, String major, String status, String interests, String skills,
+			String website) {
+		
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				ResultSet resultSet2 = null;
+				PreparedStatement stmt2 = null;
+				try {
+					conn.setAutoCommit(true);
+					
+
+					stmt2 = conn.prepareStatement("UPDATE users " + 
+							"SET userPic = ?, userSite = ?, userBio = ?, userMajor = ?, userStatus = ?, userInterests = ?, userSkills = ? " + 
+							"WHERE user_id = ?");
+
+					stmt2.setString(1, picture);
+					stmt2.setString(2, website);
+					stmt2.setString(3, bio);
+					stmt2.setString(4, major);
+					stmt2.setString(5, status);
+					stmt2.setString(6, interests);
+					stmt2.setString(7, skills);
+					stmt2.setInt(8, id);
+					
+					stmt2.execute();
+					
+					//if(resultSet2.next()) {
+						User nUser = new User();
+						//loadUser(nUser, resultSet2, 1);
+						nUser.setEmail("beans");
+						return nUser;
+					//}else {
+						//return null;
+					//}
+				}finally {
+					DBUtil.closeQuietly(resultSet2);
+					DBUtil.closeQuietly(stmt2);
+				}
+			}
+		});
+		
+	}
 }

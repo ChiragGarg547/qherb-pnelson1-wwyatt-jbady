@@ -29,4 +29,6 @@ public interface IDatabase {
 	public Boolean deleteUser(String username, String email);
 	public int getUserIdFromEmailOrUsername(String eou);
 	Message sendMessage(int sender, int recipient, String date, String subject, String body);
+	public User editProfile(int id, String picture, String bio, String major, String status, String interests, String skills,
+			String website);
 }

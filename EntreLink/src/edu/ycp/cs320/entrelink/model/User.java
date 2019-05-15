@@ -33,7 +33,7 @@ public class User {
 		this.userLastName = userLastName;
 		this.email = email;
 		this.userType = userType;
-		profilePic = "https://imgur.com/a/HmmZUYX";
+		profilePic = "https://i.imgur.com/46FYTE7.png";
 	}
 	public void setBio(String bio) {
 		this.bio = bio;

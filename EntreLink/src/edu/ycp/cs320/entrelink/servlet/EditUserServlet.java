@@ -36,55 +36,43 @@ public class EditUserServlet extends HttpServlet {
 		
 		System.out.println("Edit User Servlet: doPost");
 		
+		HttpSession session=req.getSession();
+		session.getAttribute("loggedInName");
 
 		// holds the error message text, if there is any
 		String errorMessage = null;
 
 		// decode POSTed form parameters and dispatch to controller
 		// there was a try block here but I deleted it
-			String major = req.getParameter("loggedInMajor");
+			String picture = req.getParameter("loggedInImg");
 			String bio = req.getParameter("loggedInBio");
+			String major = req.getParameter("loggedInMajor");
 			String status = req.getParameter("loggedInStatus");
 			String interests = req.getParameter("loggedInInterests");
 			String skills = req.getParameter("loggedInSkills");
 			String website = req.getParameter("loggedInWebsite");
-			String picture = req.getParameter("loggedInImg");
+			System.out.println(website + " this is website");
+			
+			int id = (int)session.getAttribute("loggedInId");
+			
+			if(picture.equals(" ") || picture.equals("") || picture == null) {
+				picture = "https://i.imgur.com/46FYTE7.png";
+			}
 			
 			UserController controller = new UserController();
-			if(!major.isEmpty()) {
-				System.out.println(major+"\n\n");
-				controller.editUserMajor(req.getSession().getAttribute("loggedInUserName").toString(), major);
-				req.getSession().setAttribute("loggedInMajor", major);
-			}
-			if(!bio.isEmpty()) {
-				System.out.println(bio+"\n\n");
-				controller.editUserBio(req.getSession().getAttribute("loggedInUserName").toString(), bio);
-				req.getSession().setAttribute("loggedInBio", bio);
-			}
-			if(!status.isEmpty()) {
-				System.out.println(status+"\n\n");
-				controller.editUserStatus(req.getSession().getAttribute("loggedInUserName").toString(), status);
-				req.getSession().setAttribute("loggedInStatus", status);
-			}
-			if(!interests.isEmpty()) {
-				System.out.println(interests+"\n\n");
-				controller.editUserInterests(req.getSession().getAttribute("loggedInUserName").toString(), interests);
-				req.getSession().setAttribute("loggedInInterests", interests);
-			}
-			if(!skills.isEmpty()) {
-				System.out.println(skills+"\n\n");
-				controller.editUserSkills(req.getSession().getAttribute("loggedInUserName").toString(), skills);
-				req.getSession().setAttribute("loggedInSkills", skills);
-			}
-			if(!website.isEmpty()) {
-				System.out.println(website+"\n\n");
-				controller.editUserWebsite(req.getSession().getAttribute("loggedInUserName").toString(), website);
-				req.getSession().setAttribute("loggedInWebsite", website);
-			}
-			if(!picture.isEmpty()) {
-				System.out.println("this is it.." +req.getParameter("userpicture")+"..\n");
-				controller.editUserPic(req.getSession().getAttribute("loggedInUserName").toString(), picture);
-				req.getSession().setAttribute("loggedInImg", picture);
+			
+			if(controller.editProfile(id, picture, bio, major, status, interests, skills, website) != null) {
+				System.out.println("Profile successfully updated.");
+				session.setAttribute("loggedInInterests", interests);
+				session.setAttribute("loggedInImg", picture);
+				session.setAttribute("loggedInBio", bio);
+				session.setAttribute("loggedInMajor", major);
+				session.setAttribute("loggedInStatus", status);
+				session.setAttribute("loggedInSkills", skills);
+				session.setAttribute("loggedInWebsite", website);
+				
+			} else {
+				System.out.println("Error updating profile.");
 			}
 			
 			doOpenProfile(req, resp);

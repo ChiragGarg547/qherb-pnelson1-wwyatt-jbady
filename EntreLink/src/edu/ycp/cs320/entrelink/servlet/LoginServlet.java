@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.entrelink.controller.LoginController;
 import edu.ycp.cs320.entrelink.controller.PostController;
-import edu.ycp.cs320.entrelink.model.CipherPassword;
 import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
 import edu.ycp.cs320.entrelink.servlet.ProfileServlet;
@@ -47,18 +46,11 @@ public class LoginServlet extends HttpServlet {
 		LoginController controller = new LoginController();
 		controller.setModel(model);
 		
-		// password encryption stuff
-		CipherPassword cipher = new CipherPassword();
-		String secret = "MarbleTulipJuicyTree";
-		
 		
 		// decode POSTed form parameters and dispatch to controller
 		// there was a try block here but I deleted it
 			String email = req.getParameter("emailAsUsername");
 			String password = req.getParameter("passwordOfUser");
-			password = cipher.encrypt(password, secret);
-			
-			
 			model.setEmail(email);
 			model.setPassword(password);
 			System.out.print(model.getEmail() + " - " + model.getPassword());
