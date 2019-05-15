@@ -72,7 +72,14 @@
 							<c:choose>
 								<c:when test="${loggedInName != post.name}">
 									<td style="text-align:right"><form action="${pageContext.servletContext.contextPath}/newmessage" method="compMessage">
-										<input type="Submit" name="${post.name}" value="Message Student" class="msgUser">
+									<c:choose>
+										<c:when test="${post.postType != 2}">
+											<input type="Submit" name="${post.name}" value="Message Student" class="msgUser">
+										</c:when>
+										<c:otherwise>
+											<input type="Submit" name="${post.name}" value="Message Business" class="msgUser">
+										</c:otherwise>
+									</c:choose>
 									</form></td>
 								</c:when>
 							</c:choose>

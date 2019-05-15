@@ -94,9 +94,13 @@
 							<table style="width:100%">
 	            				<tr>
 									<td><p class="projectTags">Tags: ${bPost.tags}</p></td>
-									<td style="text-align:right"><form action="${pageContext.servletContext.contextPath}/newmessage" method="compMessage">
-										<input type="Submit" name="${bPost.name}" value="Message Business" class="msgUser">
-									</form></td>
+									<c:choose>
+										<c:when test="${loggedInName != bPost.name}">
+											<td style="text-align:right"><form action="${pageContext.servletContext.contextPath}/newmessage" method="compMessage">
+												<input type="Submit" name="${bPost.name}" value="Message Business" class="msgUser">
+											</form></td>
+										</c:when>
+									</c:choose>
 								</tr>
 							</table>
 							
