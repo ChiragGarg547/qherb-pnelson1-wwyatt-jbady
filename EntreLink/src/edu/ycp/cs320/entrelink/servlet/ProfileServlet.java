@@ -34,6 +34,7 @@ public class ProfileServlet extends HttpServlet {
 		System.out.println(session.getAttribute("loggedInUserName").toString());
 		posts = controller.searchPostsByUserName(session.getAttribute("loggedInUserName").toString());
 		//posts.addAll(controller.getAllPosts("business"));
+		if(posts.size() == 0) posts = null;
 		
 		if (posts == null) {
 			errorMessage = "No Posts were found in the Library";

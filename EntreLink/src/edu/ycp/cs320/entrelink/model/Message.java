@@ -98,7 +98,7 @@ public class Message {
 		
 		// get list of messages returned from query
 		messages = controller.getAllMessagesForLoggedInUser(userId);
-		
+		if(messages.size() == 0) messages = null;
 		// Add result objects as request attributes
 		req.setAttribute("errorMessage", errorMessage);
 		req.setAttribute("messages", messages);
