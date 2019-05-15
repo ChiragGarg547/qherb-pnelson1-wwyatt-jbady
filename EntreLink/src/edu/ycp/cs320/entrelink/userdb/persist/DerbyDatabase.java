@@ -342,7 +342,6 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public ArrayList<Post> findPostsByTitle(String title) {
-		// TODO Auto-generated method stub
 		return executeTransaction(new Transaction<ArrayList<Post>>() {
 			@Override
 			public ArrayList<Post> execute(Connection conn) throws SQLException {
@@ -352,14 +351,31 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					conn.setAutoCommit(true);
 					
-					stmt = conn.prepareStatement("select * from posts where posts.title like '%' || ? || '%'");
+					stmt = conn.prepareStatement(
+							"SELECT posts.post_id, users.user_id, users.firstName, users.LastName, posts.timePosted, posts.title, posts.description, posts.postType, posts.tags " + 
+							"FROM users, posts " + 
+							"WHERE posts.poster_id = users.user_id AND " +
+							"((posts.title LIKE '%' || ? || '%') OR " +
+							"(posts.tags LIKE '%' || ? || '%')) " +
+							"ORDER BY posts.post_id DESC"
+							);
+
 					stmt.setString(1, title);
+					stmt.setString(2, title);
 					
 					resultSet = stmt.executeQuery();
 					
 					while(resultSet.next()) {
 							Post nPost = new Post();
-							loadPost(nPost, resultSet, 1);
+							int index =1;
+							nPost.setPostId(resultSet.getInt(index++));
+							nPost.setPosterId(resultSet.getInt(index++));
+							nPost.setName(resultSet.getString(index++), resultSet.getString(index++));
+							nPost.setTimePosted(resultSet.getString(index++));
+							nPost.setTitle(resultSet.getString(index++));
+							nPost.setDescription(resultSet.getString(index++));
+							nPost.setPostType(resultSet.getInt(index++));
+							nPost.setTags(resultSet.getString(index++));
 							posts.add(nPost);
 					}
 				}finally {
