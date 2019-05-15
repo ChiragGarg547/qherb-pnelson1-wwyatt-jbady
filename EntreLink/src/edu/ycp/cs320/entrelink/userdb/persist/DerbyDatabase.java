@@ -356,12 +356,14 @@ public class DerbyDatabase implements IDatabase {
 							"FROM users, posts " + 
 							"WHERE posts.poster_id = users.user_id AND " +
 							"((posts.title LIKE '%' || ? || '%') OR " +
-							"(posts.tags LIKE '%' || ? || '%')) " +
+							"(posts.tags LIKE '%' || ? || '%') OR " +
+							"(posts.description LIKE '%' || ? || '%')) " +
 							"ORDER BY posts.post_id DESC"
 							);
 
 					stmt.setString(1, title);
 					stmt.setString(2, title);
+					stmt.setString(3, title);
 					
 					resultSet = stmt.executeQuery();
 					

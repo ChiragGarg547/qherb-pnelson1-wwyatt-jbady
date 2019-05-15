@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String search = req.getParameter("search");
-		
+		req.setAttribute("search", req.getParameter("search"));
 		System.out.println("\nSearchServlet: doPost");
 		HttpSession session=req.getSession();
 		session.getAttribute("loggedInName");
