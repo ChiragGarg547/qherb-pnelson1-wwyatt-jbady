@@ -46,59 +46,74 @@
 	</div>
 
 	<div class="content">
-		<h2>${viewProfileName}'s Profile</h2>
-		<img src="${viewProfileImg}" id="profileImg">
+
+		<h2>${userv.userFirstName} ${userv.userLastName}'s Profile</h2>
+		<img src="${userv.profilePic}" id="profileImg">
 		<h3>${viewProfileName}</h3>
-		<p id="profileBio">${viewProfileBio}</p>
+		<p id="profileBio">${userv.bio}</p>
 		<table id="profileTable">
-			<tr>
-				<td class="leftTable">Major: </td>
-				<td class="rightTable">${viewProfileMajor}</td>
-			</tr>
-			<tr>
-				<td class="leftTable">Status: </td>
-				<td class="rightTable">${viewProfileStatus}</td>
-			</tr>
-			<tr>
-				<td class="leftTable">Interests: </td>
-				<td class="rightTable">${viewProfileInterests}</td>
-			</tr>
-			<tr>
-				<td class="leftTable">Skills: </td>
-				<td class="rightTable">${viewProfileSkills}</td>
-			</tr>
-			<tr>
-				<td class="leftTable">Website: </td>
-				<td class="rightTable">
-					<c:choose>
-						<c:when test="${loggedInWebsite != 'N/A'}">
-							<a target="_blank" href="${loggedInWebsite}">${viewProfileWebsite}</a>
-						</c:when>
-						<c:otherwise>
-							${viewProfileWebsite}
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
+		
+			<c:choose>
+				<c:when test="${userv.major != '' and userv.major != ' ' and userv.major != 'N/A' and userv.major != null}">
+					<tr>
+						<td class="leftTable">Major: </td>
+						<td class="rightTable">${userv.major}</td>
+					</tr>
+				</c:when>
+			</c:choose>
+				
+			<c:choose>
+				<c:when test="${userv.status != '' and userv.status != ' ' and userv.status != 'N/A' and userv.status != null}">
+					<tr>
+						<td class="leftTable">Status: </td>
+						<td class="rightTable">${userv.status}</td>
+					</tr>
+				</c:when>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${userv.interests != '' and userv.interests != ' ' and userv.interests != 'N/A' and userv.interests != null}">
+					<tr>
+						<td class="leftTable">Interests: </td>
+						<td class="rightTable">${userv.interests}</td>
+					</tr>
+				</c:when>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${userv.skills != '' and userv.skills != ' ' and userv.skills != 'N/A' and userv.skills != null}">
+					<tr>
+						<td class="leftTable">Skills: </td>
+						<td class="rightTable">${userv.skills}</td>
+					</tr>
+				</c:when>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${userv.website != '' and userv.website != ' ' and userv.website != 'N/A' and userv.website != null}">
+					<tr>
+						<td class="leftTable">Website: </td>
+						<td class="rightTable"><a target="_blank" href="${userv.website}">${userv.website}</a></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			
 		</table>
-		<form action="${pageContext.servletContext.contextPath}/edituser" method="openEditUser">
-			<input type="Submit" name="editProfile" value="Edit Profile">
-		</form>
 		<br/><br/>
-		<h3>My Projects</h3>
+		<h3>${userv.userFirstName} ${userv.userLastName}'s Posts</h3>
 			<c:forEach items="${posts}" var="post">
 				<div postId="${post.postId}" class="listingPost">
-        			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${viewProfileName} on ${post.timePosted}</span></h3>
-        			<div class="hideOverflow">
+	    			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${viewProfileName} on ${post.timePosted}</span></h3>
+	    			<div class="hideOverflow">
 						<p class="projectDescription">${post.description}</p>
 						
-            			<table style="width:100%">
-            				<tr>
+	        			<table style="width:100%">
+	        				<tr>
 								<td><p class="projectTags">Tags: ${post.tags}</p></td>
 							</tr>
 						</table>
-        			</div>
-    			</div>
+	    			</div>
+				</div>
 			</c:forEach>
 	</div>
 

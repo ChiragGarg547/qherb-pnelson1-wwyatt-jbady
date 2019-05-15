@@ -155,7 +155,7 @@
 		<br/><br/>
 		<c:choose>
 			<c:when test="${posts != null}">
-				<h3>My Projects</h3>
+				<h3>My Posts</h3>
 				<c:forEach items="${posts}" var="post">
 					<div postId="${post.postId}" class="listingPost">
 	        			<h3 class="projectTitle">${post.title}<span class="projectPosted"> posted by ${loggedInName} on ${post.timePosted}</span></h3>
