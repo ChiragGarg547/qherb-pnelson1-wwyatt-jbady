@@ -42,13 +42,13 @@ public class EditUserServlet extends HttpServlet {
 
 		// decode POSTed form parameters and dispatch to controller
 		// there was a try block here but I deleted it
-			String major = req.getParameter("usermajor");
-			String bio = req.getParameter("userbio");
-			String status = req.getParameter("userstatus");
-			String interests = req.getParameter("userinterests");
-			String skills = req.getParameter("userskills");
-			String website = req.getParameter("userwebsite");
-			String picture = req.getParameter("userpicture");
+			String major = req.getParameter("loggedInMajor");
+			String bio = req.getParameter("loggedInBio");
+			String status = req.getParameter("loggedInStatus");
+			String interests = req.getParameter("loggedInInterests");
+			String skills = req.getParameter("loggedInSkills");
+			String website = req.getParameter("loggedInWebsite");
+			String picture = req.getParameter("loggedInImg");
 			
 			UserController controller = new UserController();
 			if(!major.isEmpty()) {
