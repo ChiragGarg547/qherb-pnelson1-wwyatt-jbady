@@ -55,6 +55,15 @@ public class SignupServlet extends HttpServlet {
 			String lastname = req.getParameter("lastname");
 			String accountType = req.getParameter("accountType");
 			
+			req.setAttribute("newUsername", newUsername);
+			req.setAttribute("newEmail", newEmail);
+			req.setAttribute("confirmEmail", confirmEmail);
+			req.setAttribute("newPassword", newPassword);
+			req.setAttribute("confirmPassword", confirmPassword);
+			req.setAttribute("firstname", firstname);
+			req.setAttribute("lastname", lastname);
+			req.setAttribute("accountType", accountType);
+			
 			User model = new User(newUsername, newPassword, firstname, lastname, newEmail, accountType);
 			SignupController controller = new SignupController();
 			controller.setModel(model);
@@ -69,25 +78,28 @@ public class SignupServlet extends HttpServlet {
 				errorMessage = "The username or email already exists.";
 			}
 			if(!areEmailsSame) {
-				errorMessage = "The emails entered are different.";
+				errorMessage = "The emails entered do not match.";
 				System.out.println("Invalid email input.");
 			}
 			if(!arePasswordsSame) {
-				errorMessage = "The passwords entered are different.";
+				errorMessage = "The passwords entered do not match.";
 				System.out.println("Invalid password input.");
 			}
 			if(!isEmailValid) {
 				errorMessage = "The email must be @ycp.edu.";
 				System.out.println("Email not YCP.");
 			}
-			
+			req.setAttribute("errorMessage", errorMessage);
 			// otherwise, sign the user up
 			if(!doesUserExist && areEmailsSame && arePasswordsSame && isEmailValid) {
 				UserController uController = new UserController();
 				uController.createNewUser(model.getUsername(), CipherPassword.encrypt(model.getPassword(), secret), model.getUserFirstName(), 
 						model.getUserLastName(), model.getEmail(), model.getUserType());
 				req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+			} else {
+				req.getRequestDispatcher("/_view/signup.jsp").forward(req, resp);
 			}
+			
 		
 	}
 	

@@ -67,6 +67,7 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(isUser);
 			if(!isUser) {
 				errorMessage = "The username or password is incorrect.";
+				req.setAttribute("errorMessage", errorMessage);
 				req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 			}
 			// otherwise, log the user in
@@ -84,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("loggedInWebsite", controller.getModel().getWebsite());
 				session.setAttribute("loggedInId", controller.getModel().getUserId());
 				session.setAttribute("loggedInType", controller.getModel().getUserType());
-				session.setAttribute("errorMessage", "");
+				session.setAttribute("errorMessage", null);
 				
 				Post post = new Post();
 				post.postPosts(req);
