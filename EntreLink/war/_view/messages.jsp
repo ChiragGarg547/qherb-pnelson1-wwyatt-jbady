@@ -57,22 +57,26 @@
 						<input type="Submit" value="Compose New Message" class="msgUser">
 					</form>
 					
-					<form action="${pageContext.servletContext.contextPath}/findMessage" method="post" id="findMessage">
-				
-						<c:forEach items="${messages}" var="msg">
+						<c:choose>
+							<c:when test="${messages != null}">
+								<c:forEach items="${messages}" var="msg">
+									<br/>
+									<table id="messageTable">
+										<tr>
+											<th>${msg.recipientName} - ${msg.subject}</th>
+											<th style="text-align:right">Received ${msg.date}</th>
+										</tr>
+										<tr>
+											<td colspan="2">${msg.body}</td>
+										</tr>
+									</table>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
 							<br/>
-							<table id="messageTable">
-								<tr>
-									<th>${msg.recipientName} - ${msg.subject}</th>
-									<th style="text-align:right">Received ${msg.date}</th>
-								</tr>
-								<tr>
-									<td colspan="2">${msg.body}</td>
-								</tr>
-							</table>
-						</c:forEach>
-					
-					</form>
+								<h3 style="color:red">You have no messages.</h3>
+							</c:otherwise>
+						</c:choose>
 				</center>
 			</c:when>
 			
