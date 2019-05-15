@@ -313,3 +313,9 @@ html, body {
 	border-radius:5px;
 }
 #messageTable tr:nth-child(even) {background-color: #f2f2f2;}
+
+.errorMessage {
+	text-align: center;
+	color: red;
+	padding-bottom: 20px;
+}
