@@ -51,7 +51,7 @@
 		
 		<h3>${loggedInName}</h3>
 		<center>
-			<form action="${pageContext.servletContext.contextPath}/edituser" method="openEditUser">
+			<form action="${pageContext.servletContext.contextPath}/editUser" method="openEditUser">
 				<input style="background-color:green;color:white;font-weight:bold;border-radius:4px;border:2px solid green;cursor:pointer;" type="Submit" name="editProfile" value="Edit Profile">
 			</form>
 		</center>

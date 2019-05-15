@@ -58,15 +58,15 @@
 					<table id="newPostTable">
 						<tr>
 							<td class="leftTable">Recipient<font style="font-size:8pt;"> (username or email)</font></td>
-							<td class="rightTable"><input type="text" name="msgRecipient" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;"><input hidden type="text" name="loggedInId" size="30" value="${loggedInId}" class="newPostBox"></td>
+							<td class="rightTable"><input type="text" name="msgRecipient" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;" maxlength="20"><input hidden type="text" name="loggedInId" size="30" value="${loggedInId}" class="newPostBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Subject</td>
-							<td class="rightTable"><input type="text" name="msgSubject" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;"></td>
+							<td class="rightTable"><input type="text" name="msgSubject" size="30" value="${msgSubject}" class="newPostBox" style="width:400px;" maxlength="50"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Body Text</td>
-							<td class="rightTable"><textarea name="msgBody" size="70" value="${msgBody}" id="msgBody" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;"></textarea></td>
+							<td class="rightTable"><textarea name="msgBody" size="70" value="${msgBody}" id="msgBody" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;" maxlength="500"></textarea></td>
 						</tr>
 						<tr>
 							<td></td>

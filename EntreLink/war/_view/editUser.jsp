@@ -50,33 +50,33 @@
 				<form action="${pageContext.servletContext.contextPath}/edituser" method="post">
 					<table id="newUserTable">
 						<tr>
-							<td class="leftTable">Major </td>
-							<td class="rightTable"><input type="text" name="usermajor" size="12" value="${usermajor}" class="signupBox"></td>
-						</tr>
+							<td class="leftTable">Picture </td>
+							<td class="rightTable"><input type="text" name="userpicture" size="12" value="${loggedInImg}" class="signupBox"></td>
+						</tr>	
 						<tr>
 							<td class="leftTable">Bio </td>
-							<td class="rightTable"><input type="text" name="userbio" size="12" value="${userbio}" class="signupBox"></td>
+							<td class="rightTable"><textarea type="text" name="userbio" size="12" value="${loggedInBio}" class="signupBox" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;">${loggedInBio}</textarea></td>
+						</tr>
+						<tr>
+							<td class="leftTable">Major </td>
+							<td class="rightTable"><input type="text" name="usermajor" size="12" value="${loggedInMajor}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Status </td>
-							<td class="rightTable"><input type="text" name="userstatus" size="12" value="${userstatus}" class="signupBox"></td>
+							<td class="rightTable"><input type="text" name="userstatus" size="12" value="${loggedInStatus}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Interests </td>
-							<td class="rightTable"><input type="text" name="userinterests" size="12" value="${userinterests}" class="signupBox"></td>
+							<td class="rightTable"><input type="text" name="userinterests" size="12" value="${loggedInInterests}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Skills </td>
-							<td class="rightTable"><input type="text" name="userskills" size="12" value="${userskills}" class="signupBox"></td>
+							<td class="rightTable"><input type="text" name="userskills" size="12" value="${loggedInSkills}" class="signupBox"></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Website </td>
-							<td class="rightTable"><input type="text" name="userwebsite" size="12" value="${userwebsite}" class="signupBox"></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Picture </td>
-							<td class="rightTable"><input type="text" name="userpicture" size="12" value="${userpicture}" class="signupBox"></td>
-						</tr>						
+							<td class="rightTable"><input type="text" name="userwebsite" size="12" value="${loggedInWebsite}" class="signupBox"></td>
+						</tr>					
 					</table>
 					<input type="Submit" name="edituser" value="Confirm" style="display: block; margin: 10px auto;" onclick="verifyEquals()">
 				</form>
