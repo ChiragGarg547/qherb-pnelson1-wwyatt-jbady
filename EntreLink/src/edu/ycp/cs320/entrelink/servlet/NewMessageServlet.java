@@ -98,6 +98,7 @@ public class NewMessageServlet extends HttpServlet {
 		req.setAttribute("sender", sender);
 		req.setAttribute("subject", subject);
 		req.setAttribute("body", body);
+		req.setAttribute("errorMessage", errorMessage);
 		
 		// loads the messages for the next thing
 		Message m = new Message();

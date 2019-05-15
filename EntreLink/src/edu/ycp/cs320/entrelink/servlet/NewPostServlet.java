@@ -101,6 +101,7 @@ public class NewPostServlet extends HttpServlet {
 		req.setAttribute("postTitle", postTitle);
 		req.setAttribute("postDescription", postDescription);
 		req.setAttribute("tags", tags);
+		req.setAttribute("errorMessage", errorMessage);
 		
 		Post post = new Post();
 		post.postPosts(req);
