@@ -47,38 +47,115 @@
 
 	<div class="content">
 		<h2>Edit User</h2>
-				<form action="${pageContext.servletContext.contextPath}/edituser" method="post">
+				<form action="${pageContext.servletContext.contextPath}/editUser" method="post">
 					<table id="newUserTable">
-						<tr>
-							<td class="leftTable">Picture </td>
-							<td class="rightTable"><input type="text" name="userpicture" size="12" value="${loggedInImg}" class="signupBox"></td>
-						</tr>	
-						<tr>
-							<td class="leftTable">Bio </td>
-							<td class="rightTable"><textarea type="text" name="userbio" size="12" value="${loggedInBio}" class="signupBox" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;">${loggedInBio}</textarea></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Major </td>
-							<td class="rightTable"><input type="text" name="usermajor" size="12" value="${loggedInMajor}" class="signupBox"></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Status </td>
-							<td class="rightTable"><input type="text" name="userstatus" size="12" value="${loggedInStatus}" class="signupBox"></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Interests </td>
-							<td class="rightTable"><input type="text" name="userinterests" size="12" value="${loggedInInterests}" class="signupBox"></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Skills </td>
-							<td class="rightTable"><input type="text" name="userskills" size="12" value="${loggedInSkills}" class="signupBox"></td>
-						</tr>
-						<tr>
-							<td class="leftTable">Website </td>
-							<td class="rightTable"><input type="text" name="userwebsite" size="12" value="${loggedInWebsite}" class="signupBox"></td>
-						</tr>					
+						<c:choose>
+							<c:when test="${loggedInImg != 'https://i.imgur.com/46FYTE7.png'}">
+								<tr>
+									<td class="leftTable">Picture </td>
+									<td class="rightTable"><input type="text" name="loggedInImg" size="12" value="${loggedInImg}" class="signupBox"></td>
+								</tr>	
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Picture </td>
+									<td class="rightTable"><input type="text" name="loggedInImg" size="12" value="" class="signupBox"></td>
+								</tr>	
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInBio != '' and loggedInBio != ' ' and loggedInBio != 'N/A'}">
+								<tr>
+									<td class="leftTable">Bio </td>
+									<td class="rightTable"><textarea type="text" name="loggedInBio" size="12" value="${loggedInBio}" class="signupBox" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;">${loggedInBio}</textarea></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Bio </td>
+									<td class="rightTable"><textarea type="text" name="loggedInBio" size="12" value="" class="signupBox" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;"></textarea></td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInMajor != '' and loggedInMajor != ' ' and loggedInMajor != 'N/A'}">
+								<tr>
+									<td class="leftTable">Major </td>
+									<td class="rightTable"><input type="text" name="loggedInMajor" size="12" value="${loggedInMajor}" class="signupBox"></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Major </td>
+									<td class="rightTable"><input type="text" name="loggedInMajor" size="12" value="" class="signupBox"></td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInStatus != '' and loggedInStatus != ' ' and loggedInStatus != 'N/A'}">
+								<tr>
+									<td class="leftTable">Status </td>
+									<td class="rightTable"><input type="text" name="loggedInStatus" size="12" value="${loggedInStatus}" class="signupBox"></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Status </td>
+									<td class="rightTable"><input type="text" name="loggedInStatus" size="12" value="" class="signupBox"></td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInInterests != '' and loggedInInterests != ' ' and loggedInInterests != 'N/A'}">
+								<tr>
+									<td class="leftTable">Interests </td>
+									<td class="rightTable"><input type="text" name="loggedInInterests" size="12" value="${loggedInInterests}" class="signupBox"></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Interests </td>
+									<td class="rightTable"><input type="text" name="loggedInInterests" size="12" value="" class="signupBox"></td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInSkills != '' and loggedInSkills != ' ' and loggedInSkills != 'N/A'}">
+								<tr>
+									<td class="leftTable">Skills </td>
+									<td class="rightTable"><input type="text" name="loggedInSkills" size="12" value="${loggedInSkills}" class="signupBox"></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Skills </td>
+									<td class="rightTable"><input type="text" name="loggedInSkills" size="12" value="" class="signupBox"></td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${loggedInWebsite != '' and loggedInWebsite != ' ' and loggedInWebsite != 'N/A'}">
+								<tr>
+									<td class="leftTable">Website </td>
+									<td class="rightTable"><input type="text" name="loggedInWebsite" size="12" value="${loggedInWebsite}" class="signupBox"></td>
+								</tr>	
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="leftTable">Website </td>
+									<td class="rightTable"><input type="text" name="loggedInWebsite" size="12" value="" class="signupBox"></td>
+								</tr>	
+							</c:otherwise>
+						</c:choose>
+										
 					</table>
-					<input type="Submit" name="edituser" value="Confirm" style="display: block; margin: 10px auto;" onclick="verifyEquals()">
+					<input type="Submit" name="edituser" value="Confirm" style="display: block; margin: 10px auto;" method="post">
 				</form>
 	</div>
 

@@ -57,7 +57,7 @@
 		</center>
 		
 		<c:choose>
-			<c:when test="${loggedInBio != ''}">
+			<c:when test="${loggedInBio != '' and loggedInBio != 'N/A'}">
 				<p id="profileBio">${loggedInBio}</p>
 			</c:when>
 			
