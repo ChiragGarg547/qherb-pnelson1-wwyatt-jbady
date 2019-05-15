@@ -46,6 +46,10 @@
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.entrelink.servlet.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ViewProfileServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.entrelink.servlet.ViewProfileServlet</servlet-class>
+  </servlet>
 
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -87,6 +91,10 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ViewProfileServlet</servlet-name>
+    <url-pattern>/viewProfile/*</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
