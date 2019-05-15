@@ -85,7 +85,7 @@ public class EditUserServlet extends HttpServlet {
 
 			// get list of posts returned from query
 			System.out.println(session.getAttribute("loggedInUserName").toString());
-			posts = controller2.searchPostsByUserName(session.getAttribute("loggedInUserName").toString());
+			posts = controller2.searchPostsByUserId((int)session.getAttribute("loggedInId"));
 			//posts.addAll(controller.getAllPosts("business"));
 			if(posts.size() == 0) posts = null;
 			

@@ -1279,4 +1279,46 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	public ArrayList<Post> searchPostsByUserId(int id) {
+		return executeTransaction(new Transaction<ArrayList<Post>>() {
+			@Override
+			public ArrayList<Post> execute(Connection conn) throws SQLException {
+				ArrayList<Post> posts = new ArrayList<Post>();
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;							
+				try {
+					conn.setAutoCommit(true);
+					
+					stmt = conn.prepareStatement(
+							"SELECT posts.post_id, users.user_id, users.firstName, users.LastName, posts.timePosted, posts.title, posts.description, posts.postType, posts.tags " + 
+							"FROM users, posts " + 
+							"WHERE posts.poster_id = ? AND posts.poster_id = users.user_id " +
+							"ORDER BY posts.post_id DESC"
+							);
+
+					stmt.setInt(1, id);
+					
+					resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()) {
+							Post nPost = new Post();
+							int index =1;
+							nPost.setPostId(resultSet.getInt(index++));
+							nPost.setPosterId(resultSet.getInt(index++));
+							nPost.setName(resultSet.getString(index++), resultSet.getString(index++));
+							nPost.setTimePosted(resultSet.getString(index++));
+							nPost.setTitle(resultSet.getString(index++));
+							nPost.setDescription(resultSet.getString(index++));
+							nPost.setPostType(resultSet.getInt(index++));
+							nPost.setTags(resultSet.getString(index++));
+							posts.add(nPost);
+					}
+				}finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+				return posts;
+			}
+		});
+	}
 }

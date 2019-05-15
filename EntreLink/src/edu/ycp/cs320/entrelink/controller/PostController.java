@@ -114,4 +114,15 @@ public class PostController {
 		// return authors for this title
 		return posts;
 	}
+	public ArrayList<Post> searchPostsByUserId(int id) {
+		System.out.println("Searching for posts from user ID '" + id + "'");
+		ArrayList<Post> postList = db.searchPostsByUserId(id);
+		
+		if(postList.isEmpty()) {
+			System.out.println("No posts were found for user ID '" + id + "'");
+			return null;
+		}
+		System.out.println("Found " + postList.size() + " posts for user ID '" + id + "'");
+		return postList;
+	}
 }

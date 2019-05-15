@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.ycp.cs320.entrelink.controller.PostController;
 import edu.ycp.cs320.entrelink.controller.UserController;
 import edu.ycp.cs320.entrelink.model.Post;
 import edu.ycp.cs320.entrelink.model.User;
@@ -17,6 +18,7 @@ public class ViewProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	UserController controller = null;
+	PostController controller2 = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -30,6 +32,7 @@ public class ViewProfileServlet extends HttpServlet {
 		String errorMessage = "";
         
 		controller = new UserController();
+		controller2 = new PostController();
 		
 		String parseURL = req.getPathInfo();
 		parseURL = parseURL.substring(1, parseURL.length());
@@ -57,6 +60,14 @@ public class ViewProfileServlet extends HttpServlet {
 		}
 		else {
 			System.out.println("Successfully retrieved data for user ID '" + userID + "'");
+			ArrayList<Post> posts = null;
+			posts = controller2.searchPostsByUserId(userID);
+			//posts.addAll(controller.getAllPosts("business"));
+			if(posts == null || posts.size() == 0) posts = null;
+
+			// Add result objects as request attributes
+			req.setAttribute("errorMessage", errorMessage);
+			req.setAttribute("posts", posts);
 		}
 		req.setAttribute("userv", user);
 
