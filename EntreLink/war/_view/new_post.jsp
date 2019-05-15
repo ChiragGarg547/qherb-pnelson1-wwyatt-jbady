@@ -53,7 +53,10 @@
 		
 		
 			<c:when test="${! empty loggedInName}">
-				<h2>New Post</h2>
+				<h2>New Post</h2><br/><br/>
+				<c:if test="${! empty errorMessage}">
+					<div class="errorMessage">${errorMessage}</div>
+				</c:if>
 				<form action="${pageContext.servletContext.contextPath}/new_post" method="post" id="newPostForm">
 					<!--<h4 style="text-align:center;color:red;">${errorMessage}</h4>-->
 					<table id="newPostTable">		
@@ -76,7 +79,7 @@
 						</tr>
 						<tr>
 							<td class="leftTable">Post Description:</td>
-							<td class="rightTable"><textarea name="postDescription" size="30" value="${postDescription}" id="postDescription" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;" maxlength="500"></textarea></td>
+							<td class="rightTable"><textarea name="postDescription" size="30" value="${postDescription}" id="postDescription" style="width:400px; max-width:400px; max-height: 300px; min-width:400px;" maxlength="500">${postDescription}</textarea></td>
 						</tr>
 						<tr>
 							<td class="leftTable">Post Tags:<br><span style="color: #999; font-size: 10px; font-style: italic;">Separate with spaces.</span></td>
@@ -88,9 +91,7 @@
 						</tr>
 					</table>
 				</form>
-				<c:if test="${! empty errorMessage}">
-					<div class="errorMessage">${errorMessage}</div>
-				</c:if>
+
 			</c:when>
 			
 			
